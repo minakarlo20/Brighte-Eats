@@ -3,7 +3,7 @@ import sql from 'mssql';
 const config: sql.config = {
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'root',
-  database: process.env.DB_NAME || 'BrighteEats',
+  database: process.env.DB_NAME || 'db_brighte_eats',
   server: process.env.DB_SERVER || 'localhost',
   options: {
     encrypt: false, // set to true if using Azure

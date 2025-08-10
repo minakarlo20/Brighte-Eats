@@ -86,7 +86,7 @@ export async function getLeadWithServices(leadId: number): Promise<Lead | null> 
 
 // Create a Lead and link to services
 export async function createLeadWithServices(
-    leadData: Omit<Lead, "LeadId" | "Services">,
+    leadData: Omit<Lead, "LeadId">,
     serviceIds: number[]
 ): Promise<Lead> {
     const pool = await poolPromise;
@@ -95,9 +95,7 @@ export async function createLeadWithServices(
     try {
         await transaction.begin();
 
-        const request = new sql.Request(transaction);
-
-        const leadResult = await request
+        const leadResult = await new sql.Request(transaction)
             .input("Name", leadData.Name)
             .input("Email", leadData.Email)
             .input("Mobile", leadData.Mobile)

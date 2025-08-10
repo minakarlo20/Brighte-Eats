@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { getLeads } from '../controllers/lead.controller';
+import { getAllLeads, createLead } from '../controllers/lead.controller';
 
 const router = Router();
 
-router.get('/', getLeads);
+router.get("/", getAllLeads);
+router.get("/:id", getAllLeads);
+router.post("/", createLead);
 
 export default router;
