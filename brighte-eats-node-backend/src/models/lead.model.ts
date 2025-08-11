@@ -8,8 +8,3 @@ export interface Lead {
   Postcode: string;
   Services: Service[];
 }
-
-export interface LeadServiceLink {
-  LeadId: number;
-  ServiceId: number;
-}

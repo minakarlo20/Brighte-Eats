@@ -1,6 +1,8 @@
+import { RequestError } from 'mssql';
 import sql, { poolPromise } from '../config/db.config';
-import { Lead, LeadServiceLink } from '../models/lead.model';
+import { Lead } from '../models/lead.model';
 import { Service } from '../models/service.model';
+import { createDuplicateNameError } from "../managers/errors.manager";
 
 
 // Get all Leads with their Services
@@ -135,6 +137,11 @@ export async function createLeadWithServices(
         };
     } catch (err) {
         await transaction.rollback();
+
+        if (err instanceof RequestError && (err.number === 2627 || err.number === 2601)) {
+            throw createDuplicateNameError(leadData.Name);
+        }
+
         throw err;
     }
 }
