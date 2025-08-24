@@ -1,0 +1,36 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Lead {
+  LeadId: Int!
+  Name: String!
+  Email: String!
+  Mobile: String!
+  Postcode: String!
+  CreatedAt: DateTime!
+  UpdatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  getAllLeads: [Lead!]!
+  getLeadById(LeadId: Int!): Lead!
+}
+
+type Mutation {
+  createLead(input: LeadsInput!): Lead!
+}
+
+input LeadsInput {
+  Name: String!
+  Email: String!
+  Mobile: String!
+  Postcode: String!
+  CreatedAt: DateTime
+  UpdatedAt: DateTime
+}
