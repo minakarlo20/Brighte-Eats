@@ -17,7 +17,7 @@ A Node.js backend API for managing leads and services, built with TypeScript and
 
 ### Prerequisites
 
-- Node.js (>= 14.x)
+- Node.js (v18.x or higher recommended)
 - Microsoft SQL Server instance
 - npm or yarn package manager
 
@@ -43,11 +43,11 @@ A Node.js backend API for managing leads and services, built with TypeScript and
       database: 'db_brighte_eats',
       options: { encrypt: false },
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+      synchronize: false, (I made a mistake in setting up the ORM sync and was unable to drop constraints so I just set it to false)
 
 4. Run database setup scripts:
 
-    Run database script uploaded in the root folder of the repository
+    Run database script uploaded (script.sql) in the root folder of the repository
 
 ## Running the App
 
