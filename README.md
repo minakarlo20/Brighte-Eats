@@ -27,7 +27,6 @@ A Node.js backend API for managing leads and services, built with TypeScript and
 
    ```bash
    git clone https://github.com/minakarlo20/Brighte-Eats.git
-   cd brighte-eats-node-backend
 
 2. Install dependencies:
 
@@ -35,11 +34,16 @@ A Node.js backend API for managing leads and services, built with TypeScript and
 
 3. Configure your MSSQL connection:
 
-    Update config file located in Brighte-Eats\brighte-eats-node-backend\src\config\db.config.ts
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'root',
-    database: process.env.DB_NAME || 'db_brighte_eats',
-    server: process.env.DB_SERVER || 'localhost',
+    Update config file located in Brighte-Eats\app.module.ts
+      type: 'mssql',
+      host: 'localhost',
+      port: 1433,
+      username: 'root',
+      password: 'root',
+      database: 'db_brighte_eats',
+      options: { encrypt: false },
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: false,
 
 4. Run database setup scripts:
 
@@ -47,32 +51,67 @@ A Node.js backend API for managing leads and services, built with TypeScript and
 
 ## Running the App
 
-    npm run dev
+    npm run start:dev
 
-### API Endpoints
+### GraphQL Playground
 
-    POST /leads
+    Once the server is running, open:
+    http://localhost:3000/graphql
+    
+## Example Query
+    query {
+        getAllLeads {
+            LeadId
+            Name
+            Email
+            Mobile
+            Postcode
+        }
+    }
 
-        request body example: 
-        (json)
-        
-            {
-                "Name": "Karlo Mina",
-                "Email": "minakarlo20@gmail.com",
-                "Mobile": "09761805183",
-                "Postcode": 3015,
-                "services": [1, 2, 3]
-            }
-        
-    GET /leads
+## Query GetById
+    query GetLead($LeadId: Int!){
+        getLeadById(LeadId: $LeadId) {
+                LeadId
+            Name
+            Email
+            Mobile
+            Postcode
+            CreatedAt
+            UpdatedAt
+        }
+    }
+    
+# Variables:
+    {
+        "LeadId": 8
+    }
 
-    GET /leads/1
+## Example Mutation
+    mutation createLead($input: LeadsInput!) {
+        createLead(input: $input) {
+            LeadId
+            Name
+            Email
+            Mobile
+            Postcode
+            CreatedAt
+        }
+    }
 
-    Also uploaded an exported collection for Postman
+# Variables:
+    {
+        "input": {
+            "Name": "Jane Doe",
+            "Email": "jane@example.com",
+            "Mobile": "09123456789",
+            "Postcode": "1234"
+        }
+    }
 
 ### Test
 
-    npx test
+    npm run test
 
 ## CONTACT
 
