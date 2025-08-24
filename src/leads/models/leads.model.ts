@@ -1,25 +1,30 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { LeadServiceType } from '../../lead-service/lead-service.model';
+import { Service } from 'src/services/services.model';
 
-@ObjectType()
+@ObjectType('Lead')
 export class Lead {
-    @Field(() => Int)
-    LeadId: number;
+  @Field(() => Int)
+  LeadId: number;
 
-    @Field(() => String)
-    Name: string;
+  @Field()
+  Name: string;
 
-    @Field(() => String)
-    Email: string;
-    
-    @Field(() => String)
-    Mobile: string;
+  @Field()
+  Email: string;
 
-    @Field(() => String)
-    Postcode: string;
+  @Field()
+  Mobile: string;
 
-    @Field(() => Date)
-    CreatedAt: Date;
+  @Field()
+  Postcode: string;
 
-    @Field(() => Date)
-    UpdatedAt: Date;
+  @Field({ nullable: true })
+  CreatedAt?: Date;
+
+  @Field({ nullable: true })
+  UpdatedAt?: Date;
+
+  @Field(() => [Service], { nullable: true })
+  Services?: Service[];
 }

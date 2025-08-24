@@ -2,14 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Service {
+  ServiceId: Int!
+  ServiceName: String!
+}
+
 type Lead {
   LeadId: Int!
   Name: String!
   Email: String!
   Mobile: String!
   Postcode: String!
-  CreatedAt: DateTime!
-  UpdatedAt: DateTime!
+  CreatedAt: DateTime
+  UpdatedAt: DateTime
+  Services: [Service!]
 }
 
 """
@@ -31,6 +37,5 @@ input LeadsInput {
   Email: String!
   Mobile: String!
   Postcode: String!
-  CreatedAt: DateTime
-  UpdatedAt: DateTime
+  ServiceIds: [Int!]
 }

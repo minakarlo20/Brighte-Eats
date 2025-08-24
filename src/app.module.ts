@@ -4,6 +4,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { LeadsModule } from './leads/leads.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServicesModule } from './services/services.module';
+import { LeadServiceModule } from './lead-service/lead-service.module';
 
 @Module({
   imports: [
@@ -26,6 +28,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
 
     LeadsModule,
+
+    ServicesModule,
+
+    LeadServiceModule
   ],
 })
 export class AppModule { }

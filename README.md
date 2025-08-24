@@ -66,6 +66,12 @@ A Node.js backend API for managing leads and services, built with TypeScript and
             Email
             Mobile
             Postcode
+            CreatedAt
+            UpdatedAt
+            Services {
+                ServiceId
+                ServiceName
+            }
         }
     }
 
@@ -96,6 +102,11 @@ A Node.js backend API for managing leads and services, built with TypeScript and
             Mobile
             Postcode
             CreatedAt
+            UpdatedAt
+            Services {
+                ServiceId
+                ServiceName
+            }
         }
     }
 
@@ -105,7 +116,8 @@ A Node.js backend API for managing leads and services, built with TypeScript and
             "Name": "Jane Doe",
             "Email": "jane@example.com",
             "Mobile": "09123456789",
-            "Postcode": "1234"
+            "Postcode": "1234",
+            "ServiceIds": [1, 2]
         }
     }
 

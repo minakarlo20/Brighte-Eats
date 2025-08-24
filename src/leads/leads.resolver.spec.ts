@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LeadsResolver } from './leads.resolver';
 import { LeadService } from './lead.service';
-import { Lead } from './leads.entity';
+import { LeadEntity } from './leads.entity';
 
 describe('LeadsResolver', () => {
   let resolver: LeadsResolver;

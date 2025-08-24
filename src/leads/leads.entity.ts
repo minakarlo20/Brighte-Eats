@@ -1,9 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { LeadServiceEntity } from '../lead-service/lead-service.entity';
+import { ServiceEntity } from '../services/services.entity';
 
-@ObjectType('Lead') // GraphQL type
-@Entity('Lead') // Table name in MSSQL
-export class Lead {
+@ObjectType('Lead')
+@Entity('Lead')
+export class LeadEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   LeadId: number;
@@ -25,10 +27,13 @@ export class Lead {
   Postcode: string;
 
   @Field({ nullable: true })
-  @CreateDateColumn({ type: 'datetime2', nullable: true })
+  @Column({ type: 'datetime2', nullable: true })
   CreatedAt?: Date;
 
   @Field({ nullable: true })
-  @UpdateDateColumn({ type: 'datetime2' })
+  @Column({ type: 'datetime2' })
   UpdatedAt?: Date;
+
+  @OneToMany(() => LeadServiceEntity, (leadService) => leadService.Lead, { cascade: true })
+  LeadServices: LeadServiceEntity[];
 }

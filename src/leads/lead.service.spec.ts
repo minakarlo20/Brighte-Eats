@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LeadService } from './lead.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Lead } from './leads.entity';
+import { LeadEntity } from './leads.entity';
 import { Repository } from 'typeorm';
 
 describe('LeadService', () => {
   let service: LeadService;
-  let repo: Repository<Lead>;
+  let repo: Repository<LeadEntity>;
 
   const mockLead = {
     LeadId: 1,
@@ -23,7 +23,7 @@ describe('LeadService', () => {
       providers: [
         LeadService,
         {
-          provide: getRepositoryToken(Lead),
+          provide: getRepositoryToken(LeadEntity),
           useValue: {
             find: jest.fn().mockResolvedValue([mockLead]),
             findOne: jest.fn().mockResolvedValue(mockLead),
@@ -35,7 +35,7 @@ describe('LeadService', () => {
     }).compile();
 
     service = module.get<LeadService>(LeadService);
-    repo = module.get<Repository<Lead>>(getRepositoryToken(Lead));
+    repo = module.get<Repository<LeadEntity>>(getRepositoryToken(LeadEntity));
   });
 
   it('should be defined', () => {

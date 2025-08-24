@@ -14,9 +14,6 @@ export class LeadsInput {
     @Field(() => String)
     Postcode: string;
 
-    @Field(() => Date, { nullable: true })
-    CreatedAt?: Date;
-
-    @Field(() => Date, { nullable: true })
-    UpdatedAt?: Date;
+    @Field(() => [Int], { nullable: true })
+    ServiceIds?: number[];
 }

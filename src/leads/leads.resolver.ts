@@ -1,31 +1,24 @@
-import { Query, Resolver, Args, Int, Mutation } from '@nestjs/graphql';
-import { Lead } from './models/leads.model';
+import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
 import { LeadService } from './lead.service';
+import { Lead } from './models/leads.model';
 import { LeadsInput } from './models/leads.input';
-
 
 @Resolver(() => Lead)
 export class LeadsResolver {
-    constructor(
-        private readonly leadService: LeadService
-    ) { }
+    constructor(private readonly leadService: LeadService) { }
 
     @Query(() => [Lead])
-    async getAllLeads() {
-        return await this.leadService.findAll();
+    getAllLeads() {
+        return this.leadService.findAll();
     }
 
     @Query(() => Lead)
-    async getLeadById(
-        @Args({ name: 'LeadId', type: () => Int }) LeadId: number
-    ) {
-        return await this.leadService.findOne(LeadId);
+    getLeadById(@Args('LeadId', { type: () => Int }) LeadId: number) {
+        return this.leadService.findOne(LeadId);
     }
 
     @Mutation(() => Lead)
-    async createLead(
-        @Args('input') input: LeadsInput
-    ) {
-        return await this.leadService.create(input);
+    createLead(@Args('input') input: LeadsInput) {
+        return this.leadService.create(input);
     }
 }
